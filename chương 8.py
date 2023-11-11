@@ -1,9 +1,5 @@
 #CHƯƠNG 8
 #8.1: Tìm số lớn nhất, số nhỏ nhất
-n = int(input("Nhập n: "))
-x = float(input("Nhập x: "))
-A = (x*x + x + 1)**n + (x*x - x + 1)**n
-print("A = (x*x + x + 1)^n + (x*x - x + 1)^n","=", A)
 
 a = float(input("Nhập số a: "))
 b = float(input("Nhập số b: "))
@@ -180,15 +176,15 @@ for i in range(0,n):
 #8.10
 n = int(input("Nhập n: "))
 x = float(input("Nhập x: "))
-S = (x*x + 1)^n 
-print("S = (x*x + 1)^n =", S)
+S = (x*x + 1)**n 
+print("S = (x*x + 1)**n =", S)
 
 
 #8.11
 n = int(input("Nhập n: "))
 x = float(input("Nhập x: "))
-A = (x*x + x + 1)^n + (x*x - x + 1)^n
-print("A = (x*x + x + 1)^n + (x*x - x + 1)^n","=", A)
+A = (x*x + x + 1)**n + (x*x - x + 1)**n
+print("A = (x*x + x + 1)**n + (x*x - x + 1)**n","=", A)
 
 
 #8.12
@@ -269,22 +265,26 @@ print("UCLN của", a, "và", b, "là:", ucln)
 
 
 #8.17
-def gcd(a, b):
-    while(b):
+# Hàm tính UCLN sử dụng thuật toán Euclid
+def find_gcd(a, b):
+    while b:
         a, b = b, a % b
     return a
 
-def lcm(a, b):
-    return (a * b) // gcd(a, b)
+# Hàm tính BCLN của a và b
+def find_lcm(a, b):
+    gcd = find_gcd(a, b)
+    lcm = abs(a * b) // gcd
+    return lcm
 
-# Nhập từ bàn phím hai số nguyên a và b
+# Yêu cầu người dùng nhập hai số nguyên a và b
 a = int(input("Nhập số nguyên a: "))
 b = int(input("Nhập số nguyên b: "))
-# Tìm bcLN của a và b
-bcln = BCLN(a, b)
 
-# In kết quả
-print("BCLN của", a, "và", b, "là:", bcln)
+# Tìm và in ra BCLN của a và b
+lcm = find_lcm(a, b)
+print("Bội chung lớn nhất của", a, "và", b, "là:", lcm)
+
 
 
 #8.18
@@ -329,21 +329,25 @@ print("Dãy số lẻ sau khi đảo ngược:", reversed_sequence)
 
 
 #8.20
+
 import math
 
-def approximate_exp(x):
+def approximate_exp(x, epsilon):
     n = 1
-    approximation = 1 + x**2 / n
-    
-    while abs(math.exp(x) - approximation) > 1e-4:
+    approximation = 1 + (x**2) / n
+    while abs(math.exp(x) - approximation) > epsilon:
         n += 1
-        approximation = 1 + x**2 / n
+        approximation += (x**2) / n
     
     return approximation
 
-x = 1
-approximation = approximate_exp(x)
-print(f"e ≈ {approximation:.5f}")
+# Sử dụng chương trình để tính gần đúng giá trị của e^x với sai số 10^(-4)
+x = 2.5 # Giá trị của x
+epsilon = 1e-4 # Sai số cho phép
+
+approximation = approximate_exp(x, epsilon)
+print("Giá trị gần đúng của e^{} là: {}".format(x, approximation))
+
 
 
 
